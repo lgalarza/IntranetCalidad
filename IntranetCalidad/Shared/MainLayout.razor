@@ -1,0 +1,86 @@
+﻿@inherits LayoutComponentBase
+
+@using Blazored.LocalStorage
+@using Syncfusion.Blazor.Navigations
+@using static CalidadDominioDTO.SeguridadDTO;
+
+@inject ILocalStorageService _session
+@inject NavigationManager _navigation
+
+<div class="bb-page">
+
+    <Sidebar @ref="sidebar"
+             IconName="IconName.App"
+             Title="Intranet Calidad"
+             DataProvider="SidebarDataProvider"
+             Style="background:#1C2F24;color:white" />
+
+    <main>
+        <div class="bb-top-row px-4 d-flex justify-content-end">
+            <a style="color: #1C2F24;background-color:white" target="_blank" @onclick=CerrarSesion>Cerrar Sesión</a>
+        </div>
+
+        <article class="content px-4">
+            <div class="py-2">
+                @Body
+            </div>
+        </article>
+    </main>
+
+</div>
+
+@code {
+    public IEnumerable<MenuDTO> menuList;
+    public List<FuncionDTO> funcionList;
+    private Sidebar sidebar = default!;
+    private IEnumerable<NavItem> navItems = default!;
+
+    private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
+    {
+        menuList = await _session.GetItemAsync<MenuDTO[]>("_userMenu");
+        funcionList = new List<FuncionDTO>();
+        foreach (var itemFuncion in menuList.Select(f => new { f.codigoFuncion, f.nombreFuncion }).Distinct().ToList())
+        {
+            FuncionDTO itemNuevo = new FuncionDTO();
+            itemNuevo.codigoFuncion = itemFuncion.codigoFuncion;
+            itemNuevo.nombreFuncion = itemFuncion.nombreFuncion;
+            funcionList.Add(itemNuevo);
+        }
+
+        if (navItems is null)
+            navItems = GetNavItems();
+
+        return await Task.FromResult(request.ApplyTo(navItems));
+    }
+
+    private IEnumerable<NavItem> GetNavItems()
+    {
+        List<NavItem> navItems = new List<NavItem>();
+        foreach (var funcion in funcionList)
+        {
+            NavItem itemFuncion = new NavItem();
+            itemFuncion.Id = funcion.codigoFuncion.ToString();
+            itemFuncion.Text = funcion.nombreFuncion;
+            navItems.Add(itemFuncion);
+            foreach (var transaccion in menuList.Where(t => t.codigoFuncion.Equals(funcion.codigoFuncion)).Select(t => new { t.codigoTransaccion, t.nombreTransaccion, t.urlPagina }).ToList())
+            {
+                NavItem itemTransaccion = new NavItem();
+                itemTransaccion.Id = transaccion.codigoTransaccion.ToString();
+                itemTransaccion.Text = transaccion.nombreTransaccion;
+                itemTransaccion.Href = transaccion.urlPagina;
+                itemTransaccion.ParentId = funcion.codigoFuncion.ToString();
+                navItems.Add(itemTransaccion);
+            }
+        }
+        return navItems;
+    }
+    private async Task CerrarSesion()
+    {
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(100);
+            await _session.ClearAsync();
+            _navigation.NavigateTo("./login");
+        });
+    }
+}
