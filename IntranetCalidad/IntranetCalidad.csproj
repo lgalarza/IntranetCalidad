@@ -19,14 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="B4XEncryption">
-      <HintPath>E:\C\Luis Galarza\Proyectos\Encryptcion B4A\Encriptacion B4A\B4XEncryption.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>E:\C\Luis Galarza\Proyectos\Encryptcion B4A\Encriptacion B4A\BouncyCastle.Crypto.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="CalidadDominioDTO">
       <HintPath>..\..\CalidadDominioDTO\CalidadDominioDTO\bin\Release\netcoreapp3.1\CalidadDominioDTO.dll</HintPath>
     </Reference>
