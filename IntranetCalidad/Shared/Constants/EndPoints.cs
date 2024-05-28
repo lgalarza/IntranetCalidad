@@ -8,6 +8,15 @@
         public static string verificarPermisos = "Seguridad/MantenimientoObtienePermiso";
         #endregion
 
+        #region EndPoints Mantenimientos
+        public static string obtenerTipoCacao = "Configuracion/MantenimientoObtenerTipoCacao";
+        public static string grabarTipoCacao = "Configuracion/MantenimientoGrabarTipoCacao";
+        public static string listarTipoCacao = "Configuracion/ObtenerTipoCacao";
+
+
+        #endregion
+
+
         #region EndPoints Store Check
         public static string obtenerNovedades = "Mantenimiento/MantenimientoObtenerNovedades";
         public static string grabarNovedades = "Mantenimiento/MantenimientoGrabarNovedades";

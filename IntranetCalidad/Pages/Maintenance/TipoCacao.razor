@@ -1,0 +1,212 @@
+﻿@page "/Maintenance/TipoCacao"
+
+@using Blazored.LocalStorage
+@using IntranetCalidad.Shared.ComponentModels
+@using IntranetCalidad.Shared.Modals
+@using IntranetCalidad.Shared.Buttons
+@using IntranetCalidad.Shared.Constants
+@using IntranetCalidad.Validate
+@using CalidadDominioDTO
+@using static CalidadDominioDTO.MantenimientoDTO
+@using static CalidadDominioDTO.SeguridadDTO
+
+@inject ILocalStorageService _session
+@inject NavigationManager _navigation
+@inject ProjectHttpClient _httpClient
+@inject SweetAlertService Swal
+
+<style>
+    .column {
+        width: 50%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+
+<article class="art">
+    <h1 class="tituloPagina">Tipo de Cacao</h1>
+    <div class="input-group" style="width: 45%;">
+        <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Primary" OnClick="New" Size="ButtonSize.Medium" Text="Agregar" />
+    </div>
+
+    <PhModal @ref="modalSeccion">
+        <Title>Tipo de Cacao</Title>
+        <Body>
+            <EditForm Model="tipoCacaoDTOForm">
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Tipo Cacao</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="tipoCacaoDTOForm.nombreTipoCacao" placeholder="Ingrese el nombre del tipo de Cacao">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <div class="col-sm-2">
+                        <label for="chek" class="col-sm-2 col-form-label col-form-label-lg">Estado</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-check form-switch col-sm-2 col-form-label col-form-label-lg">
+                            <input class="form-check-input" @bind-value="@tipoCacaoDTOForm.estadoTipoCacao" checked="@tipoCacaoDTOForm.estadoTipoCacao" type="checkbox" id="flexSwitchCheckChecked">
+                            @if (@tipoCacaoDTOForm.estadoTipoCacao == true)
+                            {
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
+                            }
+                            else
+                            {
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Inactivo</label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </EditForm>
+        </Body>
+        <Footer>
+            <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Success" @onclick="sendData" Size="ButtonSize.Medium" Text="Guardar" isConfirmation="true" />
+            <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Danger" @onclick="() => modalSeccion.CloseModal()" Size="ButtonSize.Medium" Text="Cerrar" />
+        </Footer>
+    </PhModal>
+    <div>
+        <br />
+        <PhTable @ref="_table" TPost="TipoCacaoDTO" isRefresh="true" TReturn="TipoCacaoDTO" Body="new TipoCacaoDTO()" EndPoint="@EndPointStr"
+                 SearchDefinition="@(new[]
+                 {
+                    "nombreTipoCacao",
+                    "descripcionEstadoTipoCacao"
+                 })">
+            <PhTableColumnHeaders>
+                <PhTableColumn Style="width:40%;" Value="Nombre del Tipo Cacao" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Estado del Tipo de Cacao" IsHeader="true" />
+            </PhTableColumnHeaders>
+            <PhTableColumnValues>
+                <PhTableColumn Value="@context.nombreTipoCacao" Style="width:40%;" />
+                @if (context.estadoTipoCacao == true)
+                {
+                    <PhTableColumn StatusColor="var(--ph-green)" Style="width:20%;" Value="@context.descripcionEstadoTipoCacao" />
+                }
+                else
+                {
+                    <PhTableColumn StatusColor="var(--ph-red)" Style="width:20%;" Value="@context.descripcionEstadoTipoCacao" />
+                }
+            </PhTableColumnValues>
+            <PhTableActions>
+                <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Primary" @onclick="@(() => Update(context))" Size="ButtonSize.Small" Text="Editar" />
+
+            </PhTableActions>
+
+        </PhTable>
+        <PhNotification @ref="@modalNotification">
+        </PhNotification>
+
+    </div>
+    <Loading @ref="loader"></Loading>
+</article>
+
+
+@code {
+    Loading loader { get; set; } = new();
+
+    private PhTable<TipoCacaoDTO, TipoCacaoDTO>? _table = new();
+    private PhModal? modalSeccion { get; set; } = new();
+    private PhNotification modalNotification { get; set; } = new();
+    TipoCacaoDTO tipoCacaoDTOForm = new TipoCacaoDTO();
+    TipoCacaoDTO tipoCacaoDTO { get; set; } = null!;
+    private string EndPointStr { get; set; } = null!;
+
+    protected override async void OnInitialized()
+    {
+        EndPointStr = EndPoints.obtenerTipoCacao;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var item = await _session.GetItemAsync<MenuDTO[]>("_userMenu");
+            Validate validate = new Validate();
+            if (!validate.isValid("./Maintenance/TipoCacao", item))
+            {
+                _navigation.NavigateTo("./Home/Error");
+            }
+            await loader.Close();
+        }
+    }
+
+    private async Task New()
+    {
+        tipoCacaoDTOForm = new TipoCacaoDTO();
+        tipoCacaoDTOForm.estadoTipoCacao = true;
+        tipoCacaoDTOForm.codigoTipoCacao = 0;
+        await modalSeccion.NewModal();
+    }
+
+    private async Task sendData()
+    {
+        await loader.Show();
+        string mensajeTransaccion = string.Empty;
+        string iconoMostrar = string.Empty;
+
+        try
+        {
+            // tipoCacaoDTOForm.usuarioTransaccion = await _session.GetItemAsync<string>("codigoUsuario");
+            // seccionDTOForm.equipoTransaccion = await _session.GetItemAsync<string>("equipoTransaccion");
+
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, EndPoints.grabarTipoCacao)
+            {
+                Content = JsonContent.Create(tipoCacaoDTOForm)
+            };
+            var postResponse = await _httpClient.SendAsync(postRequest);
+            if (postResponse.IsSuccessStatusCode)
+            {
+                var returnType = await postResponse.Content.ReadFromJsonAsync<RespuestaDTO>()!;
+                if (returnType.CodigoError == 0)
+                {
+                    await _table!.GetDataAsync();
+                    mensajeTransaccion = returnType.MensajeError;
+                    iconoMostrar = "success";
+                }
+                else
+                {
+                    mensajeTransaccion = returnType.MensajeError;
+                    iconoMostrar = "error";
+                }
+                await modalSeccion.CloseModal();
+                await loader.Close();
+            }
+            else
+            {
+                //await modalNotification.ErrorModal("Error de servicio");
+                mensajeTransaccion = "Error de servicio";
+                iconoMostrar = "error";
+                await modalSeccion.CloseModal();
+                await loader.Close();
+            }
+
+            await Swal.FireAsync(new SweetAlertOptions
+            {
+                ConfirmButtonColor = "var(--ph-skyblue)",
+                Title = "Intranet Lotería Nacional",
+                Text = mensajeTransaccion,
+                Icon = iconoMostrar
+            });
+
+        }
+        catch (HttpRequestException e)
+        {
+            await modalNotification.ErrorModal(e.Message.ToString());
+            await modalSeccion.CloseModal();
+            await loader.Close();
+        }
+    }
+
+    private async Task Update(TipoCacaoDTO tipoCacaoDTO)
+    {
+        tipoCacaoDTOForm = tipoCacaoDTO;
+        await modalSeccion.UpdateModal();
+        StateHasChanged();
+    }
+
+}
