@@ -29,7 +29,7 @@
 </style>
 
 <article class="art">
-    <h1 class="tituloPagina">Tipo de Cacao</h1>
+    <h1 class="tituloPagina" style="color: #1C2F24">Tipo de Cacao</h1>
     <div class="input-group" style="width: 45%;">
         <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Primary" OnClick="New" Size="ButtonSize.Medium" Text="Agregar" />
     </div>
@@ -38,8 +38,8 @@
         <Title>Tipo de Cacao</Title>
         <Body>
             <EditForm Model="tipoCacaoDTOForm">
-                <div class="form-group row" style="margin-bottom:2%;">
-                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Tipo Cacao</label>
+                <div class="form-group row" style="margin-bottom:2%; color:#1C2F24">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg" >Tipo Cacao</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-lg" id="det" @bind-value="tipoCacaoDTOForm.nombreTipoCacao" placeholder="Ingrese el nombre del tipo de Cacao">
                     </div>
