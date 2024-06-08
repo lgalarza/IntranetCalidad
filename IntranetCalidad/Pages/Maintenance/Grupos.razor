@@ -119,6 +119,11 @@
     protected override async void OnInitialized()
     {
         EndPointStr = EndPoints.obtenerGrupos;
+
+        // var result = await _httpClient.PostAsJsonAsync<GruposDTO>
+        //        (EndPointStr, grupoDTOForm);
+
+        // _table.Data = result;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
