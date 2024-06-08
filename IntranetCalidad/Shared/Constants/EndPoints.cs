@@ -12,6 +12,9 @@
         public static string obtenerTipoCacao = "Configuracion/MantenimientoObtenerTipoCacao";
         public static string grabarTipoCacao = "Configuracion/MantenimientoGrabarTipoCacao";
         public static string listarTipoCacao = "Configuracion/ObtenerTipoCacao";
+        public static string obtenerGrupos = "Configuracion/MantenimientoObtenerGrupo";
+        public static string grabarGrupos = "Configuracion/MantenimientoGrabarGrupo";
+        public static string listarGrupos= "Configuracion/ObtenerGrupo";
 
 
         #endregion
