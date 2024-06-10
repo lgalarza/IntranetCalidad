@@ -1,4 +1,4 @@
-﻿@page "/Maintenance/PronosticoDeCoscha"
+﻿@page "/Maintenance/ProyeccionesZona"
 
 @using Blazored.LocalStorage
 @using IntranetCalidad.Shared.ComponentModels
@@ -41,8 +41,26 @@
                 <div class="form-group row" style="margin-bottom:2%; color:#1C2F24">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Pronostico de  Cosecha</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="pronosticoCosechaDTOForm.codigoZona" placeholder="Ingrese el nombre del Grupo">
+                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="pronosticoCosechaDTOForm.codigoZona" placeholder="Ingrese el nombre del pronostico de cosecha">
                     </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">Mes</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Elige..</option>
+                        <option value="enero">ENERO</option>
+                        <option value="febrero">FEBRERO</option>
+                        <option value="marzo">MARZO</option>
+                        <option value="abril">ABRIL</option>
+                        <option value="mayo">MAYO</option>
+                        <option value="junio">JUNIO</option>
+                        <option value="julio">JULIO</option>
+                        <option value="agosto">AGOSTO</option>
+                        <option value="septiembre">SEPTIEMBRE</option>
+                        <option value="octubre">OCTUBRE</option>
+                        <option value="noviembre">NOVIEMBRE</option>
+                        <option value="diciembre">DICIEMBRE</option>
+                    </select>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <div class="col-sm-2">
