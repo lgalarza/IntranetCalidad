@@ -15,15 +15,14 @@
         public static string obtenerGrupos = "Configuracion/MantenimientoObtenerGrupo";
         public static string grabarGrupos = "Configuracion/MantenimientoGrabarGrupo";
         public static string listarGrupos= "Configuracion/ObtenerGrupo";
-        public static string obtenerProgramas = "Configuracion/MantenimientoObtenerProgramas";
-        public static string grabarProgramas = "Configuracion/MantenimientoGrabarProgramas";
+        public static string obtenerProgramas = "Configuracion/MantenimientoObtenerGrupoVendorFactura";
+        public static string grabarProgramas = "Configuracion/MantenimientoMantenimientoGrabarVendorFactura";
         public static string listarProgramas = "Configuracion/ObtenerProgramas";
         public static string obtenerCertificaciones = "Configuracion/MantenimientoObtenerCertificaciones";
         public static string grabarCertificaciones = "Configuracion/MantenimientoGrabarCertificaciones";
         public static string listarCertificaciones = "Configuracion/ObtenerCertificaciones";
         public static string obtenerPronosticoCosecha = "Configuracion/MantenimientoObtenerPronosticoCosecha";
         public static string grabarPronosticoCosecha = "Configuracion/MantenimientoGrabarPronosticoCosecha";
-        public static string listarPronosticoCosecha = "Configuracion/ObtenerPronosticoCosecha";
 
 
         #endregion

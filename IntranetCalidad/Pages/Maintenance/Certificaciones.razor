@@ -29,19 +29,27 @@
 </style>
 
 <article class="art">
-    <h1 class="tituloPagina" style="color: #1C2F24">Grupos</h1>
+    <h1 class="tituloPagina" style="color: #1C2F24">Certificaciones</h1>
     <div class="input-group" style="width: 45%;">
         <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Primary" OnClick="New" Size="ButtonSize.Medium" Text="Agregar" />
     </div>
 
     <PhModal @ref="modalCertificaciones">
-        <Title>Grupos</Title>
+        <Title>Cerificaciones</Title>
         <Body>
             <EditForm Model="certificacionesDTOForm">
                 <div class="form-group row" style="margin-bottom:2%; color:#1C2F24">
-                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Grupos</label>
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Cetificaciones</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-lg" id="det" @bind-value="certificacionesDTOForm.nombreCertificacion" placeholder="Ingrese el nombre del Grupo">
+                    </div>
+                    <label for="det" class="col-sm-2 col-form-label">Fecha desde</label>
+                    <div class="col-sm-2">
+                        <input type="date" class="form-control rounded" id="fechaDesde" @bind-value="@fechaDesde" pattern="\d{4}/\d{2}/\d{2}" />
+                    </div>
+                    <label for="det" class="col-sm-2 col-form-label">Fecha hasta</label>
+                    <div class="col-sm-2">
+                        <input type="date" class="form-control rounded" id="fechaHasta" @bind-value="@fechaHasta" pattern="\d{4}/\d{2}/\d{2}" />
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
@@ -115,10 +123,12 @@
     CertificacionesDTO certificacionesDTOForm = new CertificacionesDTO();
     CertificacionesDTO certificacionesDTO { get; set; } = null!;
     private string EndPointStr { get; set; } = null!;
+    DateTime fechaDesde;
+    DateTime fechaHasta;
 
     protected override async void OnInitialized()
     {
-        EndPointStr = EndPoints.obtenerGrupos;
+        EndPointStr = EndPoints.obtenerCertificaciones;
 
         // var result = await _httpClient.PostAsJsonAsync<GruposDTO>
         //        (EndPointStr, grupoDTOForm);
@@ -159,7 +169,7 @@
             // tipoCacaoDTOForm.usuarioTransaccion = await _session.GetItemAsync<string>("codigoUsuario");
             // seccionDTOForm.equipoTransaccion = await _session.GetItemAsync<string>("equipoTransaccion");
 
-            var postRequest = new HttpRequestMessage(HttpMethod.Post, EndPoints.grabarGrupos)
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, EndPoints.grabarCertificaciones)
                 {
                     Content = JsonContent.Create(certificacionesDTOForm)
                 };

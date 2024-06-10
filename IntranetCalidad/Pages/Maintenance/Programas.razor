@@ -35,11 +35,11 @@
     </div>
 
     <PhModal @ref="modalPrograma">
-        <Title>Grupos</Title>
+        <Title>Programas</Title>
         <Body>
             <EditForm Model="programasDTO">
                 <div class="form-group row" style="margin-bottom:2%; color:#1C2F24">
-                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Grupos</label>
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Programas</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-lg" id="det" @bind-value="programasDTOForm.nombrePrograma" placeholder="Ingrese el nombre del Grupo">
                     </div>
@@ -74,8 +74,8 @@
         <PhTable @ref="_table" TPost="ProgramasDTO" isRefresh="true" TReturn="ProgramasDTO" Body="new ProgramasDTO()" EndPoint="@EndPointStr"
                  SearchDefinition="@(new[]
                  {
-                    "nombreGrupo",
-                    "descripcionEstadoGrupo"
+                    "nombrePrograma",
+                    "descripcionEstadoPrograma"
                  })">
             <PhTableColumnHeaders>
                 <PhTableColumn Style="width:40%;" Value="Nombre del Grupo" IsHeader="true" />
