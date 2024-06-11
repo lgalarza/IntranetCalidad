@@ -9,6 +9,7 @@
         #endregion
 
         #region EndPoints Mantenimientos
+        public static string listarCatalogo = "Configuracion/ObtenerCatalogoxNombreWeb";
         public static string obtenerTipoCacao = "Configuracion/MantenimientoObtenerTipoCacao";
         public static string grabarTipoCacao = "Configuracion/MantenimientoGrabarTipoCacao";
         public static string listarTipoCacao = "Configuracion/ObtenerTipoCacao";

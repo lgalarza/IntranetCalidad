@@ -30,37 +30,109 @@
 
 <article class="art">
     <h1 class="tituloPagina" style="color: #1C2F24">Pronostico de cosecha</h1>
+    <div class="input-group" style="width: 45%; ">
+        <Combo TItem="DetalleCatalogoDTO" text="nombreCatalogo" Data="Data" Identifier="comboModZona" placeholder="Seleccione la zona" selectValue="dtSelectZona" value="codigoCatalogo" ValueChanged="ValueChange">
+        </Combo>
+    </div>
     <div class="input-group" style="width: 45%;">
         <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Primary" OnClick="New" Size="ButtonSize.Medium" Text="Agregar" />
     </div>
-
     <PhModal @ref="modalPronosticoCosecha">
         <Title>Pronostico de cosecha</Title>
         <Body>
             <EditForm Model="pronosticoCosechaDTOForm">
                 <div class="form-group row" style="margin-bottom:2%; color:#1C2F24">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Pronostico de  Cosecha</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="pronosticoCosechaDTOForm.codigoZona" placeholder="Ingrese el nombre del pronostico de cosecha">
-                    </div>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="inputState">Mes</label>
+                    <label for="inputState">Año</label>
                     <select id="inputState" class="form-control">
-                        <option selected>Elige..</option>
-                        <option value="enero">ENERO</option>
-                        <option value="febrero">FEBRERO</option>
-                        <option value="marzo">MARZO</option>
-                        <option value="abril">ABRIL</option>
-                        <option value="mayo">MAYO</option>
-                        <option value="junio">JUNIO</option>
-                        <option value="julio">JULIO</option>
-                        <option value="agosto">AGOSTO</option>
-                        <option value="septiembre">SEPTIEMBRE</option>
-                        <option value="octubre">OCTUBRE</option>
-                        <option value="noviembre">NOVIEMBRE</option>
-                        <option value="diciembre">DICIEMBRE</option>
+                        <option selected>Seleccione al año</option>
+                        <option value="enero">2024</option>
+                        <option value="febrero">2025</option>
+                        <option value="marzo">2026</option>
+                        <option value="abril">2027</option>
+                        <option value="mayo">2028</option>
+                        <option value="junio">2029</option>
+                        <option value="julio">2030</option>
+                        <option value="agosto">2031</option>
+                        <option value="septiembre">2032</option>
+                        <option value="octubre">2033</option>
+                        <option value="noviembre">2034</option>
+                        <option value="diciembre">2035</option>
                     </select>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.enero" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.febrero" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.marzo" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.abril" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.mayo" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.junio" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.julio" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.agosto" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.septiembre" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.octubre" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.noviembre" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="pronosticoCosechaDTOForm.diciembre" placeholder="Ingrese el porcentaje el mes">
+                    </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <div class="col-sm-2">
@@ -92,8 +164,9 @@
         <PhTable @ref="_table" TPost="PronosticoCosechaDTO" isRefresh="true" TReturn="PronosticoCosechaDTO" Body="new PronosticoCosechaDTO()" EndPoint="@EndPointStr"
                  SearchDefinition="@(new[]
                  {
-                    "nombreGrupo",
-                    "descripcionEstadoGrupo"
+                    "codigoZona",
+                    "anio",
+                    "descripcionEstadoPronosticoCosecha"
                  })">
             <PhTableColumnHeaders>
                 <PhTableColumn Style="width:40%;" Value="Nombre del Grupo" IsHeader="true" />
@@ -101,6 +174,7 @@
             </PhTableColumnHeaders>
             <PhTableColumnValues>
                 <PhTableColumn Value="@context.codigoZona" Style="width:40%;" />
+                <PhTableColumn Value="@Convert.ToString(context.anio)" Style="width:40%;" />
                 @if (context.estadoPronosticoCosecha == true)
                 {
                     <PhTableColumn StatusColor="var(--ph-green)" Style="width:20%;" Value="@context.descripcionEstadoPronosticoCosecha" />
@@ -133,6 +207,12 @@
     PronosticoCosechaDTO pronosticoCosechaDTOForm = new PronosticoCosechaDTO();
     PronosticoCosechaDTO pronosticoCosechaDTO { get; set; } = null!;
     private string EndPointStr { get; set; } = null!;
+    CatalogoDTO catalogo = new CatalogoDTO();
+    IEnumerable<DetalleCatalogoDTO> Data;
+    DetalleCatalogoDTO dtSelectZona = null;
+    string mensajeTransaccion = string.Empty;
+    string iconoMostrar = string.Empty;
+
 
     protected override async void OnInitialized()
     {
@@ -142,6 +222,29 @@
         //        (EndPointStr, grupoDTOForm);
 
         // _table.Data = result;
+        catalogo = new CatalogoDTO();
+        catalogo.nombreCatalogo = "Zonas";
+        var result = await _httpClient.PostAsJsonAsync<DetalleCatalogoDTO>(EndPoints.listarCatalogo, catalogo);
+        if (result is not null)
+        {
+            Data = result;
+            StateHasChanged();
+            await loader.Close();
+        }
+        else
+        {
+            mensajeTransaccion = "Error al comunicarse con el servicio";
+            iconoMostrar = "error";
+            await modalPronosticoCosecha.CloseModal();
+            await loader.Close();
+            await Swal.FireAsync(new SweetAlertOptions
+                {
+                    ConfirmButtonColor = "var(--ph-skyblue)",
+                    Title = "Intranet Calidad",
+                    Text = mensajeTransaccion,
+                    Icon = iconoMostrar
+                });
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -230,6 +333,46 @@
         pronosticoCosechaDTOForm = pronosticoCosechaDTO;
         await modalPronosticoCosecha.UpdateModal();
         StateHasChanged();
+    }
+
+    public async Task ValueChange(DetalleCatalogoDTO? item)
+    {
+        if (item != null)
+        {
+            dtSelectZona = item;
+            // PreguntasDTO deta = new PreguntasDTO();
+            // if (dtSelectZona != null)
+            // {
+            //     await loader.Show();
+            //     try
+            //     {
+            //         deta.codigoSeccion = short.Parse(dtSelectseccion.codigoSeccion.ToString());
+            //         deta.equipoTransaccion = "192.168.3.216";//await _session.GetItemAsync<string>("ip");
+            //         deta.usuarioTransaccion = await _session.GetItemAsync<string>("codigoUsuario");
+            //         preguntaDTOForm.codigoSeccion = deta.codigoSeccion;
+            //         pregunta = deta;
+            //         loadTable();
+            //     }
+            //     catch (Exception ex)
+            //     {
+
+            //         deta = new PreguntasDTO();
+            //         pregunta = deta;
+            //         loadTable();
+            //     }
+
+            // }
+            // else
+            // {
+            //     deta.codigoSeccion = 0;
+            //     deta.equipoTransaccion = "PC";
+            //     deta.usuarioTransaccion = "jucast";
+            //     pregunta = deta;
+            //     loadTable();
+            //     pregunta = null;
+            // }
+        }
+
     }
 
 }
