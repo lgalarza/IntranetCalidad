@@ -30,6 +30,10 @@
 
 <article class="art">
     <h1 class="tituloPagina" style="color: #1C2F24">Grupos</h1>
+    <div class="input-group" style="width: 45%; ">
+        <Combo TItem="DetalleCatalogoDTO" text="nombreCatalogo" Data="Data" Identifier="comboModZona" placeholder="Seleccione la zona" selectValue="dtSelectZona" value="codigoCatalogo" ValueChanged="ValueChange">
+        </Combo>
+    </div>
     <div class="input-group" style="width: 45%;">
         <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Primary" OnClick="New" Size="ButtonSize.Medium" Text="Agregar" />
     </div>
@@ -115,15 +119,44 @@
     GruposDTO grupoDTOForm = new GruposDTO();
     GruposDTO grupoDTO { get; set; } = null!;
     private string EndPointStr { get; set; } = null!;
+    CatalogoDTO catalogo = new CatalogoDTO();
+    IEnumerable<DetalleCatalogoDTO> Data;
+    DetalleCatalogoDTO dtSelectZona = null;
+    string mensajeTransaccion = string.Empty;
+    string iconoMostrar = string.Empty;
 
     protected override async void OnInitialized()
     {
         EndPointStr = EndPoints.obtenerGrupos;
 
-        // var result = await _httpClient.PostAsJsonAsync<GruposDTO>
+        // var result1 = await _httpClient.PostAsJsonAsync<GruposDTO>
         //        (EndPointStr, grupoDTOForm);
 
-        // _table.Data = result;
+        // _table.Data = result1;
+
+        catalogo = new CatalogoDTO();
+        catalogo.nombreCatalogo = "Zonas";
+        var result = await _httpClient.PostAsJsonAsync<DetalleCatalogoDTO>(EndPoints.listarCatalogo, catalogo);
+        if (result is not null)
+        {
+            Data = result;
+            StateHasChanged();
+            await loader.Close();
+        }
+        else
+        {
+            mensajeTransaccion = "Error al comunicarse con el servicio";
+            iconoMostrar = "error";
+            await modalGrupo.CloseModal();
+            await loader.Close();
+            await Swal.FireAsync(new SweetAlertOptions
+                {
+                    ConfirmButtonColor = "var(--ph-skyblue)",
+                    Title = "Intranet Calidad",
+                    Text = mensajeTransaccion,
+                    Icon = iconoMostrar
+                });
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -142,11 +175,30 @@
 
     private async Task New()
     {
-        grupoDTOForm = new GruposDTO();
-        grupoDTOForm.estadoGrupo = true;
-        grupoDTOForm.codigoGrupo = 0;
-        grupoDTOForm.codigoZona = string.Empty;
-        await modalGrupo.NewModal();
+        if (dtSelectZona != null)
+        {
+            grupoDTOForm = new GruposDTO();
+            grupoDTOForm.codigoZona = grupoDTO.codigoZona;
+            grupoDTOForm.estadoGrupo = true;
+            grupoDTOForm.codigoGrupo = 0;
+            await modalGrupo.NewModal();
+
+        }
+        else
+        {
+            //await modalNotification.ErrorModal("Seleccione un cátalogo");
+            mensajeTransaccion = "Seleccione un cátalogo";
+            iconoMostrar = "info";
+            await Swal.FireAsync(new SweetAlertOptions
+                {
+                    ConfirmButtonColor = "var(--ph-skyblue)",
+                    Title = "Intranet Lotería Nacional",
+                    Text = mensajeTransaccion,
+                    Icon = iconoMostrar
+                });
+        }
+
+
     }
 
     private async Task sendData()
@@ -170,7 +222,8 @@
                 var returnType = await postResponse.Content.ReadFromJsonAsync<RespuestaDTO>()!;
                 if (returnType.CodigoError == 0)
                 {
-                    await _table!.GetDataAsync();
+                    grupoDTO.codigoZona = grupoDTOForm.codigoZona;
+                    loadTable();
                     mensajeTransaccion = returnType.MensajeError;
                     iconoMostrar = "success";
                 }
@@ -213,6 +266,49 @@
         grupoDTOForm = grupoDTO;
         await modalGrupo.UpdateModal();
         StateHasChanged();
+    }
+
+    public async Task ValueChange(DetalleCatalogoDTO? item)
+    {
+        if (item != null)
+        {
+            dtSelectZona = item;
+            GruposDTO deta = new GruposDTO();
+            if (dtSelectZona != null)
+            {
+                await loader.Show();
+                try
+                {
+                    deta.codigoZona = dtSelectZona.codigoCatalogo.ToString();
+                    grupoDTOForm.codigoZona = deta.codigoZona;
+                    grupoDTO = deta;
+                    loadTable();
+                }
+                catch (Exception ex)
+                {
+
+                    deta = new GruposDTO();
+                    grupoDTO = deta;
+                    loadTable();
+                }
+
+            }
+            else
+            {
+                deta.codigoGrupo = 0;
+                grupoDTO = deta;
+                loadTable();
+                grupoDTO = null;
+            }
+        }
+
+    }
+
+    private async void loadTable()
+    {
+        _table.Body = grupoDTO;
+        await _table!.GetDataAsync();
+        await loader.Close();
     }
 
 }
