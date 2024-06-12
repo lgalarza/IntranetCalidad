@@ -10,10 +10,10 @@
 <div class="bb-page">
 
     <Sidebar @ref="sidebar"
-             IconName="IconName.App"
+             IconName="IconName.Alexa"
              Title="Intranet Calidad"
              DataProvider="SidebarDataProvider"
-             Style="background:#1C2F24;color:white" />
+             Style="background:white;color:#1C2F24" />
 
     <main>
         <div class="bb-top-row px-4 d-flex justify-content-end">
@@ -34,9 +34,11 @@
     public List<FuncionDTO> funcionList;
     private Sidebar sidebar = default!;
     private IEnumerable<NavItem> navItems = default!;
+    private string? imageSource;
 
     private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
     {
+        imageSource = $"./images/Agroarriba.png";
         menuList = await _session.GetItemAsync<MenuDTO[]>("_userMenu");
         funcionList = new List<FuncionDTO>();
         foreach (var itemFuncion in menuList.Select(f => new { f.codigoFuncion, f.nombreFuncion }).Distinct().ToList())
