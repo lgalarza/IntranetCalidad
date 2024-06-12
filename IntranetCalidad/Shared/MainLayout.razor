@@ -38,7 +38,6 @@
 
     private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
     {
-        imageSource = $"./images/Agroarriba.png";
         menuList = await _session.GetItemAsync<MenuDTO[]>("_userMenu");
         funcionList = new List<FuncionDTO>();
         foreach (var itemFuncion in menuList.Select(f => new { f.codigoFuncion, f.nombreFuncion }).Distinct().ToList())
@@ -63,6 +62,7 @@
             NavItem itemFuncion = new NavItem();
             itemFuncion.Id = funcion.codigoFuncion.ToString();
             itemFuncion.Text = funcion.nombreFuncion;
+            itemFuncion.IconName = IconName.PersonSquare;
             navItems.Add(itemFuncion);
             foreach (var transaccion in menuList.Where(t => t.codigoFuncion.Equals(funcion.codigoFuncion)).Select(t => new { t.codigoTransaccion, t.nombreTransaccion, t.urlPagina }).ToList())
             {
@@ -71,6 +71,7 @@
                 itemTransaccion.Text = transaccion.nombreTransaccion;
                 itemTransaccion.Href = transaccion.urlPagina;
                 itemTransaccion.ParentId = funcion.codigoFuncion.ToString();
+                itemTransaccion.IconName = IconName.SegmentedNav;
                 navItems.Add(itemTransaccion);
             }
         }
