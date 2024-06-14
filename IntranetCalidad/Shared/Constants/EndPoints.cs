@@ -19,9 +19,9 @@
         public static string obtenerProgramas = "Configuracion/MantenimientoObtenerGrupoVendorFactura";
         public static string grabarProgramas = "Configuracion/MantenimientoMantenimientoGrabarVendorFactura";
         public static string listarProgramas = "Configuracion/ObtenerProgramas";
-        public static string obtenerCertificaciones = "Configuracion/MantenimientoObtenerCertificaciones";
-        public static string grabarCertificaciones = "Configuracion/MantenimientoGrabarCertificaciones";
-        public static string listarCertificaciones = "Configuracion/ObtenerCertificaciones";
+        public static string obtenerCertificaciones = "Configuracion/MantenimientoObtenerCertificacion";
+        public static string grabarCertificaciones = "Configuracion/MantenimientoGrabarCertificacion";
+        public static string listarCertificaciones = "Configuracion/ObtenerCertificacion";
         public static string obtenerPronosticoCosecha = "Configuracion/MantenimientoObtenerPronosticoCosecha";
         public static string grabarPronosticoCosecha = "Configuracion/MantenimientoGrabarPronosticoCosecha";
 
