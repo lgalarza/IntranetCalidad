@@ -53,6 +53,12 @@
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Tolerancia</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det" @bind-value="certificacionesDTOForm.toleranciaCuota" placeholder="Ingrese el porcentaje el mes">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
                     <div class="col-sm-2">
                         <label for="chek" class="col-sm-2 col-form-label col-form-label-lg">Estado</label>
                     </div>
@@ -86,8 +92,11 @@
                     "descripcionEstadoGrupo"
                  })">
             <PhTableColumnHeaders>
-                <PhTableColumn Style="width:40%;" Value="Nombre del Grupo" IsHeader="true" />
-                <PhTableColumn Style="width:20%;" Value="Estado del Grupo" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Certificaion" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Fecha desde" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Fecha hasta" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Tolerancia" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Estado del certificacion" IsHeader="true" />
             </PhTableColumnHeaders>
             <PhTableColumnValues>
                 <PhTableColumn Value="@context.nombreCertificacion" Style="width:40%;" />
