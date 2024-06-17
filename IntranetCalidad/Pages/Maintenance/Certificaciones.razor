@@ -106,8 +106,8 @@
             <PhTableColumnValues>
                 <PhTableColumn Value="@context.codigoCertificacionAlfanumerico" Style="width:40%;" />
                 <PhTableColumn Value="@context.nombreCertificacion" Style="width:40%;" />
-                <PhTableColumn Value="@Convert.ToString(context.fechaInicial)" Style="width:40%;" />
-                <PhTableColumn Value="@Convert.ToString(context.fechaFinal)" Style="width:40%;" />
+                <PhTableColumn Value="@context.fechaInicial?.ToString("yyyy-MM-dd")" Style="width:40%;" />
+                <PhTableColumn Value="@context.fechaFinal?.ToString("yyyy-MM-dd")" Style="width:40%;" />
                 <PhTableColumn Value="@Convert.ToString(context.toleranciaCuota)" Style="width:40%;" />
                 @if (context.estadoCertificacion == true)
                 {
