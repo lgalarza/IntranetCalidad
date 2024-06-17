@@ -39,9 +39,13 @@
         <Body>
             <EditForm Model="certificacionesDTOForm">
                 <div class="form-group row" style="margin-bottom:2%; color:#1C2F24">
-                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Cetificaciones</label>
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Nombre</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="certificacionesDTOForm.nombreCertificacion" placeholder="Ingrese el nombre del certificaciones">
+                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="certificacionesDTOForm.nombreCertificacion" placeholder="Ingrese el nombre de la certificación">
+                    </div>
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Código Alfanumérico</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="certificacionesDTOForm.codigoCertificacionAlfanumerico" placeholder="Ingrese el código de la certificación">
                     </div>
                     <label for="det" class="col-sm-2 col-form-label">Fecha desde</label>
                     <div class="col-sm-2">
@@ -92,14 +96,19 @@
                     "descripcionEstadoCertificacion"
                  })">
             <PhTableColumnHeaders>
-                <PhTableColumn Style="width:20%;" Value="Certificaion" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Código" IsHeader="true" />
+                <PhTableColumn Style="width:20%;" Value="Certificación" IsHeader="true" />
                 <PhTableColumn Style="width:20%;" Value="Fecha desde" IsHeader="true" />
                 <PhTableColumn Style="width:20%;" Value="Fecha hasta" IsHeader="true" />
                 <PhTableColumn Style="width:20%;" Value="Tolerancia" IsHeader="true" />
                 <PhTableColumn Style="width:20%;" Value="Estado del certificacion" IsHeader="true" />
             </PhTableColumnHeaders>
             <PhTableColumnValues>
+                <PhTableColumn Value="@context.codigoCertificacionAlfanumerico" Style="width:40%;" />
                 <PhTableColumn Value="@context.nombreCertificacion" Style="width:40%;" />
+                <PhTableColumn Value="@Convert.ToString(context.fechaInicial)" Style="width:40%;" />
+                <PhTableColumn Value="@Convert.ToString(context.fechaFinal)" Style="width:40%;" />
+                <PhTableColumn Value="@Convert.ToString(context.toleranciaCuota)" Style="width:40%;" />
                 @if (context.estadoCertificacion == true)
                 {
                     <PhTableColumn StatusColor="var(--ph-green)" Style="width:20%;" Value="@context.descripcionEstadoCertificacion" />
@@ -143,6 +152,8 @@
         //        (EndPointStr, grupoDTOForm);
 
         // _table.Data = result;
+        fechaDesde = DateTime.Now;
+        fechaHasta = DateTime.Now;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -177,6 +188,9 @@
         {
             // tipoCacaoDTOForm.usuarioTransaccion = await _session.GetItemAsync<string>("codigoUsuario");
             // seccionDTOForm.equipoTransaccion = await _session.GetItemAsync<string>("equipoTransaccion");
+
+            certificacionesDTOForm.fechaInicial = fechaDesde;
+            certificacionesDTOForm.fechaFinal = fechaHasta;
 
             var postRequest = new HttpRequestMessage(HttpMethod.Post, EndPoints.grabarCertificaciones)
                 {
@@ -229,6 +243,7 @@
     private async Task Update(CertificacionesDTO certificacionesDTO)
     {
         certificacionesDTOForm = certificacionesDTO;
+        
         await modalCertificaciones.UpdateModal();
         StateHasChanged();
     }
