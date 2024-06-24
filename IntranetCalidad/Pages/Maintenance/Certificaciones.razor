@@ -162,7 +162,7 @@
         {
             var item = await _session.GetItemAsync<MenuDTO[]>("_userMenu");
             Validate validate = new Validate();
-            if (!validate.isValid("./Maintenance/TipoCacao", item))
+            if (!validate.isValid("./Maintenance/Certificaciones", item))
             {
                 _navigation.NavigateTo("./Home/Error");
             }
@@ -225,8 +225,8 @@
 
             await Swal.FireAsync(new SweetAlertOptions
                 {
-                    ConfirmButtonColor = "var(--ph-skyblue)",
-                    Title = "Intranet Lotería Nacional",
+                    ConfirmButtonColor = "#025833",
+                    Title = "Intranet Calidad",
                     Text = mensajeTransaccion,
                     Icon = iconoMostrar
                 });
@@ -242,6 +242,8 @@
 
     private async Task Update(CertificacionesDTO certificacionesDTO)
     {
+        fechaDesde = certificacionesDTO.fechaInicial.Value;
+        fechaHasta = certificacionesDTO.fechaFinal.Value;
         certificacionesDTOForm = certificacionesDTO;
         
         await modalCertificaciones.UpdateModal();

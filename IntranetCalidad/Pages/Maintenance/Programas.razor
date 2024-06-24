@@ -30,6 +30,10 @@
 
 <article class="art">
     <h1 class="tituloPagina" style="color: #1C2F24">Programas</h1>
+    <div class="input-group" style="width: 45%; ">
+        <Combo TItem="CertificacionesDTO" text="nombreCertificacion" Data="Data" Identifier="comboModCertificacion" placeholder="Seleccione la certificación" selectValue="dtSelectCertificacion" value="codigoCertificacion" ValueChanged="ValueChange">
+        </Combo>
+    </div>
     <div class="input-group" style="width: 45%;">
         <PhButton Type="IntranetCalidad.Shared.Buttons.Enums.ButtonType.Primary" OnClick="New" Size="ButtonSize.Medium" Text="Agregar" />
     </div>
@@ -46,12 +50,6 @@
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Código Alfanumérico</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-lg" id="det" @bind-value="programasDTOForm.codigoProgramaAlfanumerico" placeholder="Ingrese el código del programa">
-                    </div>
-                </div>
-                <div class="form-group row" style="margin-bottom:2%;">
-                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Codigo Certificacion</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-lg" id="det" @bind-value="certificacionesDTO.codigoCertificacion" placeholder="Ingrese el codigo de certificación">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
@@ -90,13 +88,13 @@
             <PhTableColumnHeaders>
                 <PhTableColumn Style="width:25%;" Value="Codigo alfanumerico" IsHeader="true" />
                 <PhTableColumn Style="width:25%;" Value="Programa" IsHeader="true" />
-                <PhTableColumn Style="width:25%;" Value="Certificacion" IsHeader="true" />
+                @* <PhTableColumn Style="width:25%;" Value="Certificacion" IsHeader="true" /> *@
                 <PhTableColumn Style="width:25%;" Value="Estado del Programa" IsHeader="true" />
             </PhTableColumnHeaders>
             <PhTableColumnValues>
                 <PhTableColumn Value="@context.codigoProgramaAlfanumerico" Style="width:40%;" />
                 <PhTableColumn Value="@context.nombrePrograma" Style="width:40%;" />
-                <PhTableColumn Value="@Convert.ToString(context.codigoCertificacion)" Style="width:40%;" />
+                @* <PhTableColumn Value="@Convert.ToString(context.codigoCertificacion)" Style="width:40%;" /> *@
                 @if (context.estadoPrograma == true)
                 {
                     <PhTableColumn StatusColor="var(--ph-green)" Style="width:20%;" Value="@context.descripcionEstadoPrograma" />
@@ -128,12 +126,42 @@
     private PhNotification modalNotification { get; set; } = new();
     ProgramasDTO programasDTOForm = new ProgramasDTO();
     ProgramasDTO programasDTO { get; set; } = null!;
+    CertificacionesDTO certificacion = new CertificacionesDTO();
+    IEnumerable<CertificacionesDTO> Data;
+    CertificacionesDTO dtSelectCertificacion = null;
     private string EndPointStr { get; set; } = null!;
     CertificacionesDTO certificacionesDTO = null!;
+    string mensajeTransaccion = string.Empty;
+    string iconoMostrar = string.Empty;
+
 
     protected override async void OnInitialized()
     {
         EndPointStr = EndPoints.obtenerProgramas;
+
+        // certificacion.codigoCertificacion = 0;
+        // certificacion.nombreCertificacion = string.Empty;
+        var result1 = await _httpClient.PostAsJsonAsync<CertificacionesDTO>(EndPoints.listarCertificaciones, certificacion);
+        if (result1 is not null)
+        {
+            Data = result1;
+            StateHasChanged();
+            await loader.Close();
+        }
+        else
+        {
+            mensajeTransaccion = "Error al comunicarse con el servicio";
+            iconoMostrar = "error";
+            await modalPrograma.CloseModal();
+            await loader.Close();
+            await Swal.FireAsync(new SweetAlertOptions
+                {
+                    ConfirmButtonColor = "#025833",
+                    Title = "Intranet Calidad",
+                    Text = mensajeTransaccion,
+                    Icon = iconoMostrar
+                });
+        }
 
         // var result = await _httpClient.PostAsJsonAsync<GruposDTO>
         //        (EndPointStr, grupoDTOForm);
@@ -147,7 +175,7 @@
         {
             var item = await _session.GetItemAsync<MenuDTO[]>("_userMenu");
             Validate validate = new Validate();
-            if (!validate.isValid("./Maintenance/TipoCacao", item))
+            if (!validate.isValid("./Maintenance/Programas", item))
             {
                 _navigation.NavigateTo("./Home/Error");
             }
@@ -158,6 +186,7 @@
     private async Task New()
     {
         programasDTOForm = new ProgramasDTO();
+        programasDTOForm.codigoCertificacion = programasDTO.codigoCertificacion;
         programasDTOForm.estadoPrograma = true;
         programasDTOForm.codigoPrograma = 0;
         await modalPrograma.NewModal();
@@ -206,8 +235,8 @@
 
             await Swal.FireAsync(new SweetAlertOptions
                 {
-                    ConfirmButtonColor = "var(--ph-skyblue)",
-                    Title = "Intranet Lotería Nacional",
+                    ConfirmButtonColor = "#025833",
+                    Title = "Intranet Calidad",
                     Text = mensajeTransaccion,
                     Icon = iconoMostrar
                 });
@@ -226,6 +255,49 @@
         programasDTOForm = programasDTO;
         await modalPrograma.UpdateModal();
         StateHasChanged();
+    }
+
+    public async Task ValueChange(CertificacionesDTO? item)
+    {
+        if (item != null)
+        {
+            dtSelectCertificacion = item;
+            ProgramasDTO deta = new ProgramasDTO();
+            if (dtSelectCertificacion != null)
+            {
+                await loader.Show();
+                try
+                {
+                    deta.codigoCertificacion = dtSelectCertificacion.codigoCertificacion;
+                    programasDTOForm.codigoCertificacion = deta.codigoCertificacion;
+                    programasDTO = deta;
+                    loadTable();
+                }
+                catch (Exception ex)
+                {
+
+                    deta = new ProgramasDTO();
+                    programasDTO = deta;
+                    loadTable();
+                }
+
+            }
+            else
+            {
+                deta.codigoPrograma = 0;
+                programasDTO = deta;
+                loadTable();
+                programasDTO = null;
+            }
+        }
+
+    }
+
+    private async void loadTable()
+    {
+        _table.Body = programasDTO;
+        await _table!.GetDataAsync();
+        await loader.Close();
     }
 
 }

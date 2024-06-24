@@ -151,7 +151,7 @@
             await loader.Close();
             await Swal.FireAsync(new SweetAlertOptions
                 {
-                    ConfirmButtonColor = "var(--ph-skyblue)",
+                    ConfirmButtonColor = "#025833",
                     Title = "Intranet Calidad",
                     Text = mensajeTransaccion,
                     Icon = iconoMostrar
@@ -165,7 +165,7 @@
         {
             var item = await _session.GetItemAsync<MenuDTO[]>("_userMenu");
             Validate validate = new Validate();
-            if (!validate.isValid("./Maintenance/TipoCacao", item))
+            if (!validate.isValid("./Maintenance/Grupos", item))
             {
                 _navigation.NavigateTo("./Home/Error");
             }
@@ -191,8 +191,8 @@
             iconoMostrar = "info";
             await Swal.FireAsync(new SweetAlertOptions
                 {
-                    ConfirmButtonColor = "var(--ph-skyblue)",
-                    Title = "Intranet Lotería Nacional",
+                    ConfirmButtonColor = "#025833",
+                    Title = "Intranet Calidad",
                     Text = mensajeTransaccion,
                     Icon = iconoMostrar
                 });
@@ -246,8 +246,8 @@
 
             await Swal.FireAsync(new SweetAlertOptions
                 {
-                    ConfirmButtonColor = "var(--ph-skyblue)",
-                    Title = "Intranet Lotería Nacional",
+                    ConfirmButtonColor = "#025833",
+                    Title = "Intranet Calidad",
                     Text = mensajeTransaccion,
                     Icon = iconoMostrar
                 });
