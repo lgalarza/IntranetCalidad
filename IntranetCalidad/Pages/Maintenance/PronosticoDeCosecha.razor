@@ -50,85 +50,85 @@
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det1" value="@valorEnero" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorEnero(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det1" @bind-value="@pronosticoCosechaDTOForm.enero" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.enero = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Febrero</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det2" value="@valorFebrero" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorFebrero(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det2" @bind-value="@pronosticoCosechaDTOForm.febrero" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.febrero = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})" >
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Marzo</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det3" value="@valorMarzo" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorMarzo(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det3" @bind-value="@pronosticoCosechaDTOForm.marzo" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.marzo = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Abril</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det4" value="@valorAbril" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorAbril(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det4" @bind-value="@pronosticoCosechaDTOForm.abril" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.abril = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Mayo</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det5" value="@valorMayo" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorMayo(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det5" @bind-value="@pronosticoCosechaDTOForm.mayo" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.mayo = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Junio</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det6" value="@valorJunio" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorJunio(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det6" @bind-value="@pronosticoCosechaDTOForm.junio" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.junio = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Julio</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det7" value="@valorJulio" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorJulio(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det7" @bind-value="@pronosticoCosechaDTOForm.julio" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.julio = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Agosto</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det8" value="@valorAgosto" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorAgosto(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det8" @bind-value="@pronosticoCosechaDTOForm.agosto" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.agosto = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Septiembre</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det9" value="@valorSeptiembre" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorSeptiembre(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det9" @bind-value="@pronosticoCosechaDTOForm.septiembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.septiembre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Octubre</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det10" value="@valorOctubre" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorOctubre(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det10" @bind-value="@pronosticoCosechaDTOForm.octubre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.octubre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Noviembre</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det11" value="@valorNoviembre" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorNoviembre(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det11" @bind-value="@pronosticoCosechaDTOForm.noviembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.noviembre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Diciembre</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det12" value="@valorDiciembre" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorDiciembre(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det12" @bind-value="@pronosticoCosechaDTOForm.diciembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.diciembre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Factor Ajuste</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det13" value="@valorFactorAjuste" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorFactorAjuste(e); StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det13" @bind-value="@pronosticoCosechaDTOForm.factorAjuste" placeholder="Ingrese el porcentaje el mes" >
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Total</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det14" @bind-value="@valorTotal" readonly="readonly">
+                        <input type="number" min="0" max="100" id="det14" @bind-value="@pronosticoCosechaDTOForm.total" readonly="readonly">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
@@ -207,38 +207,10 @@
     DetalleCatalogoDTO dtSelectZona = null;
     string mensajeTransaccion = string.Empty;
     string iconoMostrar = string.Empty;
-    decimal valorTotal = 0;
-    decimal valorEnero { get; set; }
-    decimal valorFebrero { get; set; }
-    decimal valorMarzo { get; set; }
-    decimal valorAbril { get; set; }
-    decimal valorMayo { get; set; }
-    decimal valorJunio { get; set; }
-    decimal valorJulio { get; set; }
-    decimal valorAgosto { get; set; }
-    decimal valorSeptiembre { get; set; }
-    decimal valorOctubre { get; set; }
-    decimal valorNoviembre { get; set; }
-    decimal valorDiciembre { get; set; }
-    decimal valorFactorAjuste { get; set; }
 
 
     protected override async void OnInitialized()
     {
-        valorEnero = 0;
-        valorFebrero = 0;
-        valorMarzo = 0;
-        valorAbril = 0;
-        valorMayo = 0;
-        valorJunio = 0;
-        valorJulio = 0;
-        valorAgosto = 0;
-        valorSeptiembre = 0;
-        valorOctubre = 0;
-        valorNoviembre = 0;
-        valorDiciembre = 0;
-        valorFactorAjuste = 0;
-
         EndPointStr = EndPoints.obtenerPronosticoCosecha;
 
         // var result = await _httpClient.PostAsJsonAsync<GruposDTO>
@@ -304,22 +276,24 @@
 
         try
         {
-            pronosticoCosechaDTOForm.enero = valorEnero;
-            pronosticoCosechaDTOForm.febrero = valorFebrero;
-            pronosticoCosechaDTOForm.marzo = valorMarzo;
-            pronosticoCosechaDTOForm.abril = valorAbril;
-            pronosticoCosechaDTOForm.mayo = valorMayo;
-            pronosticoCosechaDTOForm.junio = valorJunio;
-            pronosticoCosechaDTOForm.julio = valorJulio;
-            pronosticoCosechaDTOForm.agosto = valorAgosto;
-            pronosticoCosechaDTOForm.septiembre = valorSeptiembre;
-            pronosticoCosechaDTOForm.octubre = valorOctubre;
-            pronosticoCosechaDTOForm.noviembre = valorNoviembre;
-            pronosticoCosechaDTOForm.diciembre = valorDiciembre;
-            pronosticoCosechaDTOForm.factorAjuste = valorFactorAjuste;
-            pronosticoCosechaDTOForm.total = valorTotal;
-            // tipoCacaoDTOForm.usuarioTransaccion = await _session.GetItemAsync<string>("codigoUsuario");
-            // seccionDTOForm.equipoTransaccion = await _session.GetItemAsync<string>("equipoTransaccion");
+            if (pronosticoCosechaDTOForm.total < 100)
+            {
+                mensajeTransaccion = "La suma de la proyección debe dar 100%, por favor revise";
+                iconoMostrar = "error";
+                await modalPronosticoCosecha.CloseModal();
+                await loader.Close();
+                await Swal.FireAsync(new SweetAlertOptions
+                {
+                    ConfirmButtonColor = "#025833",
+                    Title = "Intranet Calidad",
+                    Text = mensajeTransaccion,
+                    Icon = iconoMostrar
+                });
+                loadTable();
+                return;
+
+            }
+
 
             var postRequest = new HttpRequestMessage(HttpMethod.Post, EndPoints.grabarPronosticoCosecha)
                 {
@@ -334,6 +308,7 @@
                     await _table!.GetDataAsync();
                     mensajeTransaccion = returnType.MensajeError;
                     iconoMostrar = "success";
+
                 }
                 else
                 {
@@ -359,7 +334,7 @@
                     Text = mensajeTransaccion,
                     Icon = iconoMostrar
                 });
-
+            loadTable();
         }
         catch (HttpRequestException e)
         {
@@ -372,6 +347,7 @@
     private async Task Update(PronosticoCosechaDTO pronosticoCosechaDTO)
     {
         pronosticoCosechaDTOForm = pronosticoCosechaDTO;
+        //CalculaTotal();
         await modalPronosticoCosecha.UpdateModal();
         StateHasChanged();
     }
@@ -421,459 +397,49 @@
 
     #region Meses
 
-    private void CambioValorEnero(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+    // private void CambioValorEnero(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+    // {
+    //     if(valorTotal==100)
+    //     {
+    //         Swal.FireAsync(new SweetAlertOptions
+    //             {
+    //                 ConfirmButtonColor = "#025833",
+    //                 Title = "Intranet Calidad",
+    //                 Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
+    //                 Icon = "success"
+    //             });
+    //         return;
+    //     }
+
+    //     if(e.Value.ToString()!=pronosticoCosechaDTOForm.enero.ToString())
+    //     {
+    //         if (decimal.Parse(e.Value.ToString())<=100)
+    //         {
+    //             pronosticoCosechaDTOForm.enero = decimal.Parse(e.Value.ToString());
+    //             valorTotal = 0;
+    //             valorTotal = pronosticoCosechaDTOForm.enero.Value +valorFebrero+valorMarzo+valorAbril+valorMayo+valorJunio+valorJulio+valorAgosto+valorSeptiembre+valorOctubre+valorNoviembre+valorDiciembre;
+    //         }
+    //     }
+
+    //     if (valorTotal > 100)
+    //     {
+    //         Swal.FireAsync(new SweetAlertOptions
+    //             {
+    //                 ConfirmButtonColor = "#025833",
+    //                 Title = "Intranet Calidad",
+    //                 Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
+    //                 Icon = "success"
+    //             });
+    //         return;
+    //     }
+
+    // }
+    
+    private void CalculaTotal()
     {
-        if(valorTotal==100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if(e.Value.ToString()!=valorEnero.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString())<=100)
-            {
-                valorEnero = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero +valorFebrero+valorMarzo+valorAbril+valorMayo+valorJunio+valorJulio+valorAgosto+valorSeptiembre+valorOctubre+valorNoviembre+valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
+      pronosticoCosechaDTOForm.total = pronosticoCosechaDTOForm.enero.Value + pronosticoCosechaDTOForm.febrero.Value + pronosticoCosechaDTOForm.marzo.Value + pronosticoCosechaDTOForm.abril.Value + pronosticoCosechaDTOForm.mayo.Value + pronosticoCosechaDTOForm.junio.Value + pronosticoCosechaDTOForm.julio.Value +pronosticoCosechaDTOForm.agosto.Value + pronosticoCosechaDTOForm.septiembre.Value + pronosticoCosechaDTOForm.octubre.Value + pronosticoCosechaDTOForm.noviembre.Value + pronosticoCosechaDTOForm.diciembre.Value;
     }
-    private void CambioValorFebrero(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorFebrero.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorFebrero = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorMarzo(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorMarzo.ToString())
-        {
-            valorMarzo = decimal.Parse(e.Value.ToString());
-            valorTotal = 0;
-            valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorAbril(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorAbril.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorAbril = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorMayo(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorMayo.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorMayo = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorJunio(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorJunio.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorJunio = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorJulio(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorJulio.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorJulio = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorAgosto(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorAgosto.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorAgosto = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorSeptiembre(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorSeptiembre.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorSeptiembre = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorOctubre(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorOctubre.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorOctubre = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorNoviembre(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorNoviembre.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorNoviembre = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-    private void CambioValorDiciembre(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (valorTotal == 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-        if (e.Value.ToString() != valorDiciembre.ToString())
-        {
-            if (decimal.Parse(e.Value.ToString()) <= 100)
-            {
-                valorDiciembre = decimal.Parse(e.Value.ToString());
-                valorTotal = 0;
-                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
-            }
-        }
-
-        if (valorTotal > 100)
-        {
-            Swal.FireAsync(new SweetAlertOptions
-                {
-                    ConfirmButtonColor = "#025833",
-                    Title = "Intranet Calidad",
-                    Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
-                    Icon = "success"
-                });
-            return;
-        }
-
-    }
-
-    private void CambioValorFactorAjuste(Microsoft.AspNetCore.Components.ChangeEventArgs e)
-    {
-        if (e.Value.ToString() != valorFactorAjuste.ToString())
-        {
-            valorFactorAjuste = decimal.Parse(e.Value.ToString());
-        }
-
-        
-
-    }
+    
 
     #endregion
 }
