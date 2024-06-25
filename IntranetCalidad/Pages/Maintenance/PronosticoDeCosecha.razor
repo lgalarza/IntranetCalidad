@@ -42,6 +42,12 @@
         <Body>
             <EditForm Model="pronosticoCosechaDTOForm">
                 <div class="form-group row" style="margin-bottom:2%;">
+                    <label for="det" class="col-sm-2 col-form-label col-form-label-lg">Año</label>
+                    <div class="col-sm-10">
+                        <input type="number" min="0" max="100" id="det0" @bind-value="pronosticoCosechaDTOForm.anio">
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
                     <div class="col-sm-10">
                         <input type="number" min="0" max="100" id="det1" value="@valorEnero" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorEnero(e); StateHasChanged();})">
@@ -116,7 +122,7 @@
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Factor Ajuste</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det13" @bind-value="pronosticoCosechaDTOForm.factorAjuste" placeholder="Ingrese el factor del ajuste permitido">
+                        <input type="number" min="0" max="100" id="det13" value="@valorFactorAjuste" placeholder="Ingrese el porcentaje el mes" onchange="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {CambioValorFactorAjuste(e); StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
@@ -201,7 +207,7 @@
     DetalleCatalogoDTO dtSelectZona = null;
     string mensajeTransaccion = string.Empty;
     string iconoMostrar = string.Empty;
-    decimal valorTotal = 100;
+    decimal valorTotal = 0;
     decimal valorEnero { get; set; }
     decimal valorFebrero { get; set; }
     decimal valorMarzo { get; set; }
@@ -214,6 +220,7 @@
     decimal valorOctubre { get; set; }
     decimal valorNoviembre { get; set; }
     decimal valorDiciembre { get; set; }
+    decimal valorFactorAjuste { get; set; }
 
 
     protected override async void OnInitialized()
@@ -230,6 +237,7 @@
         valorOctubre = 0;
         valorNoviembre = 0;
         valorDiciembre = 0;
+        valorFactorAjuste = 0;
 
         EndPointStr = EndPoints.obtenerPronosticoCosecha;
 
@@ -282,6 +290,8 @@
         pronosticoCosechaDTOForm = new PronosticoCosechaDTO();
         pronosticoCosechaDTOForm.estadoPronosticoCosecha = true;
         pronosticoCosechaDTOForm.codigoPronosticoCosecha = 0;
+        pronosticoCosechaDTOForm.anio = 2024;
+        pronosticoCosechaDTOForm.codigoZona = pronosticoCosechaDTO.codigoZona;
         await modalPronosticoCosecha.NewModal();
     }
 
@@ -291,12 +301,27 @@
         string mensajeTransaccion = string.Empty;
         string iconoMostrar = string.Empty;
 
+
         try
         {
+            pronosticoCosechaDTOForm.enero = valorEnero;
+            pronosticoCosechaDTOForm.febrero = valorFebrero;
+            pronosticoCosechaDTOForm.marzo = valorMarzo;
+            pronosticoCosechaDTOForm.abril = valorAbril;
+            pronosticoCosechaDTOForm.mayo = valorMayo;
+            pronosticoCosechaDTOForm.junio = valorJunio;
+            pronosticoCosechaDTOForm.julio = valorJulio;
+            pronosticoCosechaDTOForm.agosto = valorAgosto;
+            pronosticoCosechaDTOForm.septiembre = valorSeptiembre;
+            pronosticoCosechaDTOForm.octubre = valorOctubre;
+            pronosticoCosechaDTOForm.noviembre = valorNoviembre;
+            pronosticoCosechaDTOForm.diciembre = valorDiciembre;
+            pronosticoCosechaDTOForm.factorAjuste = valorFactorAjuste;
+            pronosticoCosechaDTOForm.total = valorTotal;
             // tipoCacaoDTOForm.usuarioTransaccion = await _session.GetItemAsync<string>("codigoUsuario");
             // seccionDTOForm.equipoTransaccion = await _session.GetItemAsync<string>("equipoTransaccion");
 
-            var postRequest = new HttpRequestMessage(HttpMethod.Post, EndPoints.grabarGrupos)
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, EndPoints.grabarPronosticoCosecha)
                 {
                     Content = JsonContent.Create(pronosticoCosechaDTOForm)
                 };
@@ -407,12 +432,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if(e.Value.ToString()!=valorEnero.ToString())
         {
-            valorEnero = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorEnero;
+            if (decimal.Parse(e.Value.ToString())<=100)
+            {
+                valorEnero = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero +valorFebrero+valorMarzo+valorAbril+valorMayo+valorJunio+valorJulio+valorAgosto+valorSeptiembre+valorOctubre+valorNoviembre+valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -424,6 +454,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -438,12 +469,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorFebrero.ToString())
         {
-            valorFebrero = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorFebrero;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorFebrero = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -455,6 +491,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -469,12 +506,14 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorMarzo.ToString())
         {
             valorMarzo = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorMarzo;
+            valorTotal = 0;
+            valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
         }
 
         if (valorTotal > 100)
@@ -486,6 +525,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -500,12 +540,18 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorAbril.ToString())
         {
-            valorAbril = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorAbril;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorAbril = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
+
         }
 
         if (valorTotal > 100)
@@ -517,6 +563,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -531,12 +578,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorMayo.ToString())
         {
-            valorMayo = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorMayo;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorMayo = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -548,6 +600,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -562,12 +615,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorJunio.ToString())
         {
-            valorJunio = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorJunio;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorJunio = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -579,6 +637,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -593,12 +652,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorJulio.ToString())
         {
-            valorJulio = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorJulio;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorJulio = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -610,6 +674,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -624,12 +689,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorAgosto.ToString())
         {
-            valorAgosto = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorAgosto;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorAgosto = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -641,6 +711,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -655,12 +726,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorSeptiembre.ToString())
         {
-            valorSeptiembre = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorSeptiembre;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorSeptiembre = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -672,6 +748,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -686,12 +763,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorOctubre.ToString())
         {
-            valorOctubre = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorOctubre;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorOctubre = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -703,6 +785,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -717,12 +800,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorNoviembre.ToString())
         {
-            valorNoviembre = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorNoviembre;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorNoviembre = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -734,6 +822,7 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
     }
@@ -748,12 +837,17 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
 
         if (e.Value.ToString() != valorDiciembre.ToString())
         {
-            valorDiciembre = decimal.Parse(e.Value.ToString());
-            valorTotal = valorTotal + valorDiciembre;
+            if (decimal.Parse(e.Value.ToString()) <= 100)
+            {
+                valorDiciembre = decimal.Parse(e.Value.ToString());
+                valorTotal = 0;
+                valorTotal = valorEnero + valorFebrero + valorMarzo + valorAbril + valorMayo + valorJunio + valorJulio + valorAgosto + valorSeptiembre + valorOctubre + valorNoviembre + valorDiciembre;
+            }
         }
 
         if (valorTotal > 100)
@@ -765,7 +859,19 @@
                     Text = "Ya se ha ingresado el porcentaje total para el año, no puede ser mayor al 100%",
                     Icon = "success"
                 });
+            return;
         }
+
+    }
+
+    private void CambioValorFactorAjuste(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+    {
+        if (e.Value.ToString() != valorFactorAjuste.ToString())
+        {
+            valorFactorAjuste = decimal.Parse(e.Value.ToString());
+        }
+
+        
 
     }
 
