@@ -439,7 +439,7 @@
     {
         pronosticoCosechaDTOForm.total = pronosticoCosechaDTOForm.enero.Value + pronosticoCosechaDTOForm.febrero.Value + pronosticoCosechaDTOForm.marzo.Value + pronosticoCosechaDTOForm.abril.Value + pronosticoCosechaDTOForm.mayo.Value + pronosticoCosechaDTOForm.junio.Value + pronosticoCosechaDTOForm.julio.Value + pronosticoCosechaDTOForm.agosto.Value + pronosticoCosechaDTOForm.septiembre.Value + pronosticoCosechaDTOForm.octubre.Value + pronosticoCosechaDTOForm.noviembre.Value + pronosticoCosechaDTOForm.diciembre.Value;
 
-       if (pronosticoCosechaDTOForm.total > 100)
+       if (pronosticoCosechaDTOForm.total >= 100)
         {
             mensajeTransaccion = "La suma de la proyección debe dar 100%, por favor revise";
             iconoMostrar = "error";

@@ -6,6 +6,10 @@
         public static string validarUsuario = "Seguridad/ValidarUsuarioWeb";
         public static string obtieneMenuUsuario = "Seguridad/ObtieneMenuWeb";
         public static string verificarPermisos = "Seguridad/MantenimientoObtienePermiso";
+        public static string obtenerRoles = "Seguridad/MantenimientoObtenerPerfil";
+        public static string grabarRoles = "Seguridad/MantenimientoGrabarPerfil";
+        public static string listarRoles = "Seguridad/ObtenerPerfiles";
+
         #endregion
 
         #region EndPoints Mantenimientos
