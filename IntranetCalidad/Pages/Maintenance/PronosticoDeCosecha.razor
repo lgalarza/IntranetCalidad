@@ -48,73 +48,73 @@
                     </div>
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Factor Ajuste</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det13" @bind-value="@pronosticoCosechaDTOForm.factorAjuste" placeholder="Ingrese el porcentaje el mes">
+                        <input type="number" min="0" max="100" id="det13" @bind-value="@pronosticoCosechaDTOForm.factorAjuste" placeholder="Ingrese el valor" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.factorAjuste = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value);StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Enero</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det1" @bind-value="@pronosticoCosechaDTOForm.enero" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.enero = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det1" @bind-value="@pronosticoCosechaDTOForm.enero" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.enero = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Julio</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det7" @bind-value="@pronosticoCosechaDTOForm.julio" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.julio = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det7" @bind-value="@pronosticoCosechaDTOForm.julio" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.julio = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Febrero</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det2" @bind-value="@pronosticoCosechaDTOForm.febrero" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.febrero = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det2" @bind-value="@pronosticoCosechaDTOForm.febrero" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.febrero = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Agosto</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det8" @bind-value="@pronosticoCosechaDTOForm.agosto" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.agosto = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det8" @bind-value="@pronosticoCosechaDTOForm.agosto" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.agosto = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Marzo</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det3" @bind-value="@pronosticoCosechaDTOForm.marzo" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.marzo = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det3" @bind-value="@pronosticoCosechaDTOForm.marzo" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.marzo = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Septiembre</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det9" @bind-value="@pronosticoCosechaDTOForm.septiembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.septiembre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det9" @bind-value="@pronosticoCosechaDTOForm.septiembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.septiembre = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Abril</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det4" @bind-value="@pronosticoCosechaDTOForm.abril" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.abril = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det4" @bind-value="@pronosticoCosechaDTOForm.abril" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.abril = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Octubre</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det10" @bind-value="@pronosticoCosechaDTOForm.octubre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.octubre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det10" @bind-value="@pronosticoCosechaDTOForm.octubre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.octubre = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Mayo</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det5" @bind-value="@pronosticoCosechaDTOForm.mayo" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.mayo = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det5" @bind-value="@pronosticoCosechaDTOForm.mayo" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.mayo = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Noviembre</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det11" @bind-value="@pronosticoCosechaDTOForm.noviembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.noviembre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det11" @bind-value="@pronosticoCosechaDTOForm.noviembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.noviembre = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Junio</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det6" @bind-value="@pronosticoCosechaDTOForm.junio" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.junio = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det6" @bind-value="@pronosticoCosechaDTOForm.junio" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.junio = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Diciembre</label>
                     <div class="col-sm-4">
-                        <input type="number" min="0" max="100" id="det12" @bind-value="@pronosticoCosechaDTOForm.diciembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.diciembre = Convert.ToDecimal(e.Value == null? 0: e.Value); CalculaTotal();StateHasChanged();})">
+                        <input type="number" min="0" max="100" id="det12" @bind-value="@pronosticoCosechaDTOForm.diciembre" placeholder="Ingrese el porcentaje el mes" @oninput="@((Microsoft.AspNetCore.Components.ChangeEventArgs e) => {pronosticoCosechaDTOForm.diciembre = Convert.ToDecimal((e.Value == null || e.Value == string.Empty)? 0: e.Value); CalculaTotal();StateHasChanged();})">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
                     <label for="det" class="col-sm-2 col-form-label col-form-label-lg">% Total</label>
                     <div class="col-sm-10">
-                        <input type="number" min="0" max="100" id="det14" @bind-value="@pronosticoCosechaDTOForm.total" readonly="readonly">
+                        <input type="number" min="0" max="100" style="width:80px;" id="det14" @bind-value="@pronosticoCosechaDTOForm.total" readonly="readonly">
                     </div>
                 </div>
                 <div class="form-group row" style="margin-bottom:2%;">
@@ -438,6 +438,20 @@
     private void CalculaTotal()
     {
         pronosticoCosechaDTOForm.total = pronosticoCosechaDTOForm.enero.Value + pronosticoCosechaDTOForm.febrero.Value + pronosticoCosechaDTOForm.marzo.Value + pronosticoCosechaDTOForm.abril.Value + pronosticoCosechaDTOForm.mayo.Value + pronosticoCosechaDTOForm.junio.Value + pronosticoCosechaDTOForm.julio.Value + pronosticoCosechaDTOForm.agosto.Value + pronosticoCosechaDTOForm.septiembre.Value + pronosticoCosechaDTOForm.octubre.Value + pronosticoCosechaDTOForm.noviembre.Value + pronosticoCosechaDTOForm.diciembre.Value;
+
+       if (pronosticoCosechaDTOForm.total > 100)
+        {
+            mensajeTransaccion = "La suma de la proyección debe dar 100%, por favor revise";
+            iconoMostrar = "error";
+            Swal.FireAsync(new SweetAlertOptions
+                {
+                    ConfirmButtonColor = "#025833",
+                    Title = "Intranet Calidad",
+                    Text = mensajeTransaccion,
+                    Icon = iconoMostrar
+                });
+            return;
+        }
     }
 
 
